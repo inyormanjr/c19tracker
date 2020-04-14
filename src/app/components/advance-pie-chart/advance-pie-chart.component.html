@@ -1,0 +1,8 @@
+<div class="body" *ngIf="covidData">
+    <ngx-charts-pie-grid
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="chartData"
+    (select)="onSelect($event)">
+  </ngx-charts-pie-grid>
+</div>

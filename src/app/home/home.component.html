@@ -1,0 +1,61 @@
+<div class="body" [@ease-in]>
+    <div class="jumbotron jumbotron-fluid" id="home">
+        <h1 class="display-3">C-19 TRACKER</h1>
+        <p class="lead">This app intends to help awareness to the latest updates with regards to covid cases.</p>
+        <hr class="my-4">
+        <p class="lead">For more info about Covid-19, please click the link below to redirect to the World Health Organization official website.</p>
+        <p class="lead">
+          <a class="btn btn-warning btn-lg" href="https://www.who.int/" role="button">Go to WHO Website</a>
+        </p>
+      </div>
+      
+      <section id="section1" class="container-fluid ">
+        <div class="overall-info-section text-align-center">
+          <div class="row justify-content-center pt-5">
+            <div class="info-header">
+              <h2  class="display-4">Global Case</h2>
+              <h5 class="my-2">( {{currentDate | date}})</h5>
+            </div>
+          </div>
+          <div id="loading-area" class="row justify-content-center" *ngIf="!(globalInfo$ |async)" >
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+        </div>
+          <div class="row justify-content-center" *ngIf="(globalInfo$ |async) as gInfo">
+            <div class="col-sm-4 d-inline-flex" id="linear-guage">
+              <ngx-charts-linear-gauge
+              [view]="view"
+              [scheme]="colorScheme"
+              [value]="gInfo.cases"
+              [previousValue]="gInfo.cases + gInfo.deaths + gInfo.recovered"
+              (select)="onSelect($event)"
+              [units]="'Total Case'">
+            </ngx-charts-linear-gauge>
+            </div>
+            <div class="col-sm-4 d-inline-flex" id="linear-guage">
+              <ngx-charts-linear-gauge
+              [view]="view"
+              [scheme]="colorScheme1"
+              [value]="gInfo.deaths"
+              [previousValue]="gInfo.cases + gInfo.deaths + gInfo.recovered"
+              (select)="onSelect($event)"
+              [units]="' Deceased'">
+            </ngx-charts-linear-gauge>
+            </div>
+            <div class="col-sm-4 d-inline-flex" id="linear-guage">
+              <ngx-charts-linear-gauge
+              [view]="view"
+              [scheme]="colorScheme3"
+              [value]="gInfo.recovered"
+              [previousValue]="gInfo.cases + gInfo.deaths + gInfo.recovered"
+              (select)="onSelect($event)"
+              [units]="' Recovered'">
+            </ngx-charts-linear-gauge>
+            </div>
+          </div>
+        </div>
+      </section>
+</div>

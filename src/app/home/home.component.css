@@ -1,0 +1,37 @@
+
+.body{
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+nav {
+    background-color: #173F5F!important;
+    color:white;
+}
+
+#section1 {
+    flex: 1.0;
+}
+
+
+hr {
+    color:white;
+    background-color: white;
+    width: 60%;
+}
+
+#home {
+    text-align: center;
+    background-color: #173F5F;
+    color: white;
+    margin: 0;
+    padding: 30px;
+}
+.overall-info-section .row #linear-guage{
+    justify-content: center;
+}
+
+.info-header {
+    text-align: center;
+}

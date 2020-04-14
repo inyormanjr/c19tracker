@@ -1,0 +1,18 @@
+.body {
+    height: 100%;
+}
+
+ img {
+    width: 140px;
+    height: 140px;
+    
+    margin:10px;
+}
+
+.img-container {
+    margin:10px;
+}
+
+.how-to-prevent .card {
+    margin:0px;
+}
