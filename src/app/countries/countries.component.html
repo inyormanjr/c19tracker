@@ -1,96 +1,105 @@
 <div class="body" [@slide-in-right]>
     <div class="container-fluid">
-    <header>
-        <div [@ease-in] id="carousel-area" class="row justify-content-center">
-            <carousel class="bg-dark p-0 col-sm-12" *ngIf="(continentData$ | async) as allData">
-                <slide *ngFor="let data of allData">
-                 <div class="slide-item">
-                     <div class="card text-center">
-                       <div class="card-body">
-                         <h3 class="card-title">{{data.country}}</h3>
-                         <hr class="bg-light mt-3">
-                         <div class="row justify-content-center covid-info">
-                            <span class="col">
-                                <div [@flipper] class="cases-info">
-                                    <h2 class="text-warning">{{data.cases | number}}</h2>
-                                    <p>Cases</p>
+        <header>
+            <div [@ease-in] id="carousel-area" class="row justify-content-center">
+                <carousel class="bg-dark p-0 col-sm-12" *ngIf="(continentData$ | async) as allData">
+                    <slide *ngFor="let data of allData">
+                        <div class="slide-item">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <p class="card-title h2">{{data.country}}</p>
+                                    <hr class="bg-light mt-3">
+                                    <div class="row justify-content-center covid-info">
+                                        <span class="col">
+                                            <div [@flipper] class="cases-info">
+                                                <p class="text-warning h2">{{data.cases | number}}</p>
+                                                <p>Cases</p>
+                                            </div>
+                                        </span>
+                                        <span class="col">
+                                            <div [@flipper] class="deaths-info">
+                                                <p class="text-danger h2">{{data.deaths | number}}</p>
+                                                <p>Deaths</p>
+                                            </div>
+                                        </span>
+                                        <span class="col">
+                                            <div [@flipper] class="recovered-info">
+                                                <p class="text-success h2">{{data.recovered | number}}</p>
+                                                <p>Recovered</p>
+                                            </div>
+                                        </span>
+                                    </div>
                                 </div>
-                            </span>
-                            <span class="col">
-                                <div [@flipper] class="deaths-info">
-                                    <h2 class="text-danger">{{data.deaths | number}}</h2>
-                                    <p>Deaths</p>
-                                </div>
-                            </span>
-                            <span class="col">
-                                <div [@flipper] class="recovered-info">
-                                    <h2 class="text-success">{{data.recovered | number}}</h2>
-                                    <p>Recovered</p>
-                                </div>
-                            </span>
-                         </div>
-                       </div>
-                     </div>
-                 </div>
-                 <div class="carousel-caption d-none d-md-block">
-                    <p>There are  <strong>{{data.critical | number}}</strong> critical patient at the moment.</p>
-                  </div>
-                </slide>
-              </carousel>
-        </div>
-    </header>
-    <section class="container-fluid">
-        <div class="countries-container row" [@ease-in]  *ngIf="(allCountries$ | async | paginate: { itemsPerPage: 6, currentPage: p1, id: 'first' }) as alldata">
-            <div class="item col-md-4"   *ngFor="let data of alldata">
-                <div  class="card text-left  bg-dark text-light">
-                    <div class="card-body">
-                      <h4 class="card-title">{{data.country}}</h4>
-                      <div class="info-container container">
-                          <div>
-                              <div class="info">
-                                <table class="table table-responsive-sm text-light">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-info" >Cases</th>
-                                            <th class="text-danger">Deaths</th>
-                                            <th class="text-success">Recovered</th>
-                                            <th class="text-warning">Critical</th>
-                                            <th>Active</th>
-                                            <th class="text-danger">Death Today</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="text-center">
-                                            <td class="text-info">{{data.cases | number}}</td>
-                                            <td class="text-danger"> {{data.deaths | number}}</td>
-                                            <td class="text-success"> {{data.recovered | number}} </td>
-                                            <td class="text-warning">  {{data.critical | number }}</td>
-                                            <td>  {{data.active | number }}</td>
-                                            <td class="text-danger">  {{data.todayDeaths | number}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                  </div>
-                  
+                            </div>
+                        </div>
+                        <div class="carousel-caption d-none d-md-block">
+                            <p class="lead">There are <strong>{{data.critical | number}}</strong> critical patient at
+                                the moment.</p>
+                        </div>
+                    </slide>
+                </carousel>
             </div>
-        </div>
-        <pagination-controls *ngIf="(allCountries$ | async)"  id="first"
-                      (pageChange)="p1 = $event"
-                      (pageBoundsCorrection)="p1 = $event"
-                      maxSize="6"
-                      directionLinks="true"
-                      autoHide="true"
-                      responsive="true"
-                      previousLabel="Previous"
-                      nextLabel="Next"
-                      screenReaderPaginationLabel="Pagination"
-                      screenReaderPageLabel="page"
-                      screenReaderCurrentLabel="You're on page">
-</pagination-controls>
-    </section>
+        </header>
+        <section class="container-fluid ">
+
+            <div class="countries-container row" [@ease-in]
+                *ngIf="(allCountries$ | async | countryFilter: searchText | paginate: { itemsPerPage: 6, currentPage: p1, id: 'first' }) as alldata">
+                <div class="item col-md-4" *ngFor="let data of alldata">
+                    <div class="card text-left  bg-dark text-light">
+                        <div class="card-body text-center">
+                            <p class="card-title h4">{{data.country}}</p>
+                            <div class="info-container container">
+                                <div>
+                                    <div class="info">
+                                        <table class="table table-responsive-sm text-light">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-info">Cases</th>
+                                                    <th class="text-danger">Deaths</th>
+                                                    <th class="text-success">Recovered</th>
+                                                    <th class="text-warning">Critical</th>
+                                                    <th>Active</th>
+                                                    <th class="text-danger">Death Today</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="text-center">
+                                                    <td class="text-info">{{data.cases | number}}</td>
+                                                    <td class="text-danger"> {{data.deaths | number}}</td>
+                                                    <td class="text-success"> {{data.recovered | number}} </td>
+                                                    <td class="text-warning"> {{data.critical | number }}</td>
+                                                    <td> {{data.active | number }}</td>
+                                                    <td class="text-danger"> {{data.todayDeaths | number}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="option row fixed-bottom m-0 bg-light justify-content-center">
+                <div  class="container m-0 p-0">
+                    <div  class="col p-0 ">
+                        <div class="form-group mt-2 ml-5 mr-5">
+                            <input [(ngModel)]="searchText" type="text" class="form-control"   aria-describedby="helpId"
+                                placeholder="Ex. SEARCH USA, SPAIN, ETC">
+                        </div>
+                    </div>
+                    <div class="col p-0">
+                        <pagination-controls *ngIf="(allCountries$ | async)" id="first" (pageChange)="p1 = $event"
+                            (pageBoundsCorrection)="p1 = $event" maxSize="6" directionLinks="true" autoHide="true"
+                            responsive="true" previousLabel="Previous" nextLabel="Next"
+                            screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+                            screenReaderCurrentLabel="You're on page">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+
+        </section>
     </div>
 </div>

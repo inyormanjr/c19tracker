@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PipeTransform, Pipe } from '@angular/core';
 import { CovidApiService } from '../services/covid-api.service';
 import { CovidData } from '../models/covid.data';
 import { Observable } from 'rxjs';
@@ -22,6 +22,7 @@ export class CountriesComponent implements OnInit {
   allCountries$: Observable<CovidData []>;
   continentData$: Observable<CovidData []>;
   p1 = 1;
+  searchText = '';
   constructor(private covidDataservice: CovidApiService) { }
 
   ngOnInit(): void {
@@ -35,5 +36,18 @@ export class CountriesComponent implements OnInit {
     this.continentData$ = this.allData$.pipe(map(x => x.slice(0, 7)));
   }
   pageChanged($event) {
+  }
+}
+
+@Pipe({
+  name: 'countryFilter'
+})
+export class CountryPipe implements PipeTransform {
+  transform(covidDatas: CovidData[], searchTerm: string): CovidData[] {
+    if (!covidDatas || !searchTerm) {
+      return covidDatas;
+    }
+
+    return covidDatas.filter(data => data.country.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
   }
 }

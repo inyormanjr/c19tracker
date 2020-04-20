@@ -8,7 +8,7 @@
           <a class="btn btn-warning btn-lg" href="https://www.who.int/" role="button">Go to WHO Website</a>
         </p>
       </div>
-      
+
       <section id="section1" class="container-fluid ">
         <div class="overall-info-section text-align-center">
           <div class="row justify-content-center pt-5">
@@ -28,7 +28,7 @@
             <div class="col-sm-4 d-inline-flex" id="linear-guage">
               <ngx-charts-linear-gauge
               [view]="view"
-              [scheme]="colorScheme"
+              [scheme]="colorScheme0"
               [value]="gInfo.cases"
               [previousValue]="gInfo.cases + gInfo.deaths + gInfo.recovered"
               (select)="onSelect($event)"
@@ -58,4 +58,12 @@
           </div>
         </div>
       </section>
+</div>
+<div class="m-0 mt-2 pb-5 bg-dark text-light">
+  <div class="container">
+  <app-global-summary [summaryInfo]="summary"></app-global-summary>
+  </div>
+</div>
+<div class="map-area bg-light mb-1">
+    <app-new-cases-map [summaryInfo]="summary" [countriesWithCoords]="countriesWithCoords"></app-new-cases-map>
 </div>

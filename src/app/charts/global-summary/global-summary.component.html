@@ -1,0 +1,45 @@
+
+    <div class="m-0 chart-container text-light" >
+      <carousel  class="p-5" [interval]="false" [showIndicators]="false">
+        <slide>
+            <div class="section-header text-center m-0 mb-3">
+              <h1 class="display-4">TOP Confirmed Cases</h1>
+           </div>
+            <canvas baseChart
+            [datasets]="confirmedCasesChart"
+            [labels]="barChartsLabelConfirmedCases"
+            [options]="barChartOptions"
+            [legend]="showLegend"
+            [chartType]="barChartType"
+            >
+          </canvas>
+        </slide>
+        <slide >
+            <div class="section-header text-center m-0 mb-3">
+              <h1 class="display-4">TOP Deceased Cases</h1>
+           </div>
+            <canvas baseChart
+            [datasets]="deathsCases"
+            [labels]="barChartsLabelDeathsCases"
+            [options]="barChartOptions"
+            [legend]="showLegend"
+            [chartType]="barChartType"
+            >
+          </canvas>
+        </slide>
+        <slide >
+          <div class="section-header text-center m-0 mb-3">
+            <h1 class="display-4">TOP Recovered Cases</h1>
+         </div>
+          <canvas baseChart
+          [datasets]="recoveredCases"
+          [labels]="barChartsLabelRecoveredCases"
+          [options]="barChartOptions"
+          [legend]="showLegend"
+          [chartType]="barChartType"
+          >
+        </canvas>
+      </slide>
+      </carousel>
+
+    </div>

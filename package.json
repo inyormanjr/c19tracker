@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^1.1.0",
     "@angular/animations": "~9.0.6",
     "@angular/cdk": "^9.2.0",
     "@angular/common": "~9.0.6",
@@ -24,12 +25,15 @@
     "@ng-bootstrap/ng-bootstrap": "^6.0.2",
     "@swimlane/ngx-charts": "^13.0.2",
     "bootstrap": "^4.4.1",
+    "chart.js": "^2.9.3",
     "font-awesome": "^4.7.0",
     "ng2-animate-on-scroll": "^2.0.0",
+    "ng2-charts": "^2.3.0",
     "ngx-animate": "^1.0.1",
     "ngx-bootstrap": "^5.6.1",
     "ngx-bootstrap-navbar": "0.0.5",
     "ngx-pagination": "^5.0.0",
+    "ngx-pipes": "^2.7.3",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

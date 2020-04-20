@@ -16,20 +16,37 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
+import { CountryFilterPipe } from './country-filter.pipe';
+import { ChartsModule } from 'ng2-charts';
+import { FormsModule } from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
+import { CountryResolve, CovidSummaryResolver } from './resolvers/home.resolver';
+import {NgPipesModule} from 'ngx-pipes';
+import { GlobalSummaryComponent } from './charts/global-summary/global-summary.component';
+import { NewCasesMapComponent } from './components/new-cases-map/new-cases-map.component';
 @NgModule({
   declarations: [
     AppComponent,
     AdvancePieChartComponent,
     HomeComponent,
     CountriesComponent,
-    CovidInfoComponent
+    CovidInfoComponent,
+    CountryFilterPipe,
+    GlobalSummaryComponent,
+    NewCasesMapComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgPipesModule,
+    FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA2sk0MT31v0qB6HIoTdu9tfP9Lb11BUvg'
+    }),
     HttpClientModule,
     NgbModule,
     NgxChartsModule,
+    ChartsModule,
     BrowserAnimationsModule,
     NgxNavbarModule,
     CarouselModule,
@@ -37,7 +54,9 @@ import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
     AnimateOnScrollModule.forRoot()
   ],
   providers: [
-    CovidApiService
+    CovidApiService,
+    CountryResolve,
+    CovidSummaryResolver
   ],
   bootstrap: [AppComponent]
 })
